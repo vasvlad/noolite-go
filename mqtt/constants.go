@@ -1,6 +1,6 @@
 package main
 
-const clientID = "noolite"
+const clientID = "/devices/noolite"
 
 const modeTX = "tx"
 const modeRX = "rx"
