@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"time"
+	"strconv"
 
 	"github.com/afoninsky/noolite-go/noolite"
 	"github.com/spf13/viper"
@@ -16,9 +17,10 @@ import (
 func main() {
 
 	// configuration
-	viper.SetDefault("mqtt.host", "localhost:1883")
+	viper.SetDefault("mqtt.host", "10.0.0.33:1883")
 	viper.BindEnv("mqtt.host", "MQTT_HOST")
-	viper.SetDefault("device.port", "/dev/tty.usbserial-AL032Z5Y")
+	//viper.SetDefault("device.port", "/dev/tty.usbserial-AL032Z5Y")
+	viper.SetDefault("device.port", "/dev/ttyiUSB0")
 	viper.BindEnv("device.port", "DEVICE_PORT")
 
 	// handle interrupt signals
@@ -73,11 +75,15 @@ func main() {
 			var command string
 			switch message.Command {
 			case noolite.CmdSwitch:
-				command = "switch"
+				//command = "switch"
+				//command = string(message.Repeat)
+				command = strconv.Itoa(int(message.Toggle))
 			case noolite.CmdOff:
 				command = "off"
+				command = "0"
 			case noolite.CmdOn:
-				command = "on"
+				//command = "on"
+				command = "1"
 			default:
 				command = "unknown"
 			}
