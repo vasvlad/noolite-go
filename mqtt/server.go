@@ -74,15 +74,17 @@ func main() {
 			var command string
 			switch message.Command {
 			case noolite.CmdSwitch:
-				//command = "switch"
-				//command = string(message.Repeat)
 				command = strconv.Itoa(int(message.Toggle))
 			case noolite.CmdOff:
-				command = "off"
 				command = "0"
 			case noolite.CmdOn:
-				//command = "on"
 				command = "1"
+			case noolite.CmdBrightBack:
+				command = "brightback"
+			case noolite.CmdStopReg:
+				command = "stopreg"
+			case noolite.CmdLoadPreset:
+				command = "loadpreset"
 			default:
 				command = "unknown"
 			}
