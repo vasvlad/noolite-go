@@ -17,10 +17,9 @@ import (
 func main() {
 
 	// configuration
-	viper.SetDefault("mqtt.host", "10.0.0.33:1883")
+	viper.SetDefault("mqtt.host", "127.0.0.1:1883")
 	viper.BindEnv("mqtt.host", "MQTT_HOST")
-	//viper.SetDefault("device.port", "/dev/tty.usbserial-AL032Z5Y")
-	viper.SetDefault("device.port", "/dev/ttyiUSB0")
+	viper.SetDefault("device.port", "/dev/tty.usbserial-AL032Z5Y")
 	viper.BindEnv("device.port", "DEVICE_PORT")
 
 	// handle interrupt signals
