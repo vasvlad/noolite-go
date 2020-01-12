@@ -15,10 +15,17 @@ type Server struct {
 }
 
 func (s *Server) messageHandler(topicName, message []byte) {
-	topicParts := strings.SplitN(string(topicName), "/", 4)
-	packet := noolite.Packet{}
 
-	if (topicParts[0] != clientID) || (len(topicParts) != 4) {
+        if (!strings.HasPrefix(string(topicName), clientID)) {
+		log.Printf("ERROR: invalid clientID - %s", topicName)
+		return
+        }
+        topic := strings.Replace(string(topicName), clientID, "noolite", 1)
+
+        topicParts := strings.SplitN(string(topic), "/", 4)
+        packet := noolite.Packet{}
+
+        if (len(topicParts) != 4) {
 		log.Printf("ERROR: invalid command in channel - %s", topicName)
 		return
 	}
